@@ -68,3 +68,11 @@ KSearch configuration example using solr example.
     한글 분석 제대로 되
 
 15. Your analysis is working properly. Enjoy :)
+
+To-Do
+-----
+
+1. Improve dictionary loading time
+2. Improve memory usage
+3. Improve test coverage
+
