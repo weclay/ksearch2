@@ -1,6 +1,5 @@
 package com.weclay.ksearch2;
 
-import java.io.Reader;
 import java.io.StringReader;
 import java.io.IOException;
 
@@ -10,10 +9,8 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 import com.weclay.ksearch2.BasicKoreanAnalyzer;
-import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.WhitespaceTokenizer;
-import org.apache.lucene.analysis.tokenattributes.TermAttribute;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 
 /**
@@ -54,7 +51,7 @@ extends TestCase
 		TokenStream stream = analyzer.tokenStream("field", new StringReader(text));
 
 		// get the TermAttribute from the TokenStream
-		TermAttribute termAtt = (TermAttribute) stream.addAttribute(TermAttribute.class);
+		CharTermAttribute termAtt = (CharTermAttribute) stream.addAttribute(CharTermAttribute.class);
 		OffsetAttribute offsetAtt = (OffsetAttribute) stream.addAttribute(OffsetAttribute.class);
 
 		stream.reset();
@@ -69,7 +66,7 @@ extends TestCase
 		// print all tokens until stream is exhausted
 		while (stream.incrementToken()) {
 			//System.out.println(termAtt.term() + ": " + termAtt.termLength() + " (" + offsetAtt.startOffset() + ":" + offsetAtt.endOffset() + ")");
-			Assert.assertEquals(lengths[i], termAtt.termLength());
+			Assert.assertEquals(lengths[i], termAtt.length());
 			i++;
 		}
 

@@ -32,6 +32,8 @@ public class KoreanStemFilterFactory extends BaseTokenFilterFactory {
 		public void init(Map<String, String> args) {
 			super.init(args);
 			dicRoot = args.get("dicRoot");
+			if (dicRoot == null)
+				dicRoot = "ksearch_dic/";
 			System.setProperty("dicRoot", dicRoot);
 			// Pre initialize the dictionary. (Pre loading)
 			Dictionary.getInstance();

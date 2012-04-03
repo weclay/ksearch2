@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.tokenattributes.TermAttribute;
+import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.snu.ids.ha.ma.CharSetType;
 import org.snu.ids.ha.ma.MorphemeAnalyzer;
@@ -20,7 +20,7 @@ import org.snu.ids.ha.ma.Tokenizer;
 
 public final class KoreanStemFilter extends TokenFilter {
 
-	private final TermAttribute termAtt = addAttribute(TermAttribute.class);
+	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
 	private final OffsetAttribute offsetAtt = addAttribute(OffsetAttribute.class);
 	private char[] curTermBuffer;
 	private int curTermLength;
@@ -87,7 +87,7 @@ public final class KoreanStemFilter extends TokenFilter {
 						continue;
 					}
 					offsetAtt.setOffset(curCandidateOffsetStart, curCandidateOffsetStart + curCandidateTermLength);
-					termAtt.setTermBuffer(string.toCharArray(), 0, string.length());
+					termAtt.setEmpty().append(string);
 					curCandidateIdx++;
 					// Candidate buffer is depleted
 					if (curCandidate.size() == curCandidateIdx)
@@ -120,8 +120,8 @@ public final class KoreanStemFilter extends TokenFilter {
 						continue;
 					}
 				} else {
-					curTermBuffer = termAtt.termBuffer().clone();
-					curTermLength = termAtt.termLength();
+					curTermBuffer = termAtt.buffer().clone();
+					curTermLength = termAtt.length();
 					tokStart = offsetAtt.startOffset();
 				}
 			}
