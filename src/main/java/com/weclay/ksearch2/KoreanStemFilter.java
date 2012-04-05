@@ -36,8 +36,7 @@ public final class KoreanStemFilter extends TokenFilter {
 	private MorphemeAnalyzer ma;
 
 	/**
-	 * Build a filter that removes words that are too long or too
-	 * short from the text.
+	 * Build a filter that analyzes Korean language.
 	 */
 	public KoreanStemFilter(TokenStream in, String dicRoot)
 	{
@@ -52,7 +51,7 @@ public final class KoreanStemFilter extends TokenFilter {
 	}
 
 	/**
-	 * Returns the next input Token whose term() is the right len
+	 * Returns the next input Token whose term() is the stem of the word
 	 */
 	public final boolean incrementToken() throws IOException
 	{
