@@ -36,24 +36,26 @@ KSearch configuration example using solr example.
 7. cp ~/ksearch2/target/ksearch2-1.0-SNAPSHOT.jar ~/lucene-solr/solr/example/solr/lib
 8. Edit ~/lucene-solr/solr/example/solr/conf/schema.xml accordingly:
 
-    <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
-      <analyzer type="index">
-        <tokenizer class="solr.StandardTokenizerFactory"/>
-        <filter class="com.weclay.ksearch2.KoreanStemFilterFactory" />
-        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
-        <!-- in this example, we will only use synonyms at query time
-        <filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/>
-        -->
-        <filter class="solr.LowerCaseFilterFactory"/>
-      </analyzer>analyzer>
-      <analyzer type="query">
-        <tokenizer class="solr.StandardTokenizerFactory"/>
-        <filter class="com.weclay.ksearch2.KoreanStemFilterFactory" />
-        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
-        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
-        <filter class="solr.LowerCaseFilterFactory"/>
-      </analyzer>analyzer>
-    </fieldType>fieldType>
+``` xml
+<fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+  <analyzer type="index">
+    <tokenizer class="solr.StandardTokenizerFactory"/>
+    <filter class="com.weclay.ksearch2.KoreanStemFilterFactory" />
+    <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+    <!-- in this example, we will only use synonyms at query time
+    <filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/>
+    -->
+    <filter class="solr.LowerCaseFilterFactory"/>
+  </analyzer>analyzer>
+  <analyzer type="query">
+    <tokenizer class="solr.StandardTokenizerFactory"/>
+    <filter class="com.weclay.ksearch2.KoreanStemFilterFactory" />
+    <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+    <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+    <filter class="solr.LowerCaseFilterFactory"/>
+  </analyzer>analyzer>
+</fieldType>fieldType>
+```
 
 9. cd ~/lucene-solr/solr/example
 10. java -Xmx1024m -jar start.jar
@@ -62,10 +64,12 @@ KSearch configuration example using solr example.
 13. Put "한글 분석이 제대로 될까요?" in Field value.
 14. Following should appear:
 
-    한글 분석이 제대로 될까요
-    한글 분석 제대로 되
-    한글 분석 제대로 되
-    한글 분석 제대로 되
+```
+한글 분석이 제대로 될까요
+한글 분석 제대로 되
+한글 분석 제대로 되
+한글 분석 제대로 되
+```
 
 15. Your analysis is working properly. Enjoy :)
 
