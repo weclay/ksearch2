@@ -46,15 +46,15 @@ KSearch configuration example using solr example.
     <filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/>
     -->
     <filter class="solr.LowerCaseFilterFactory"/>
-  </analyzer>analyzer>
+  </analyzer>
   <analyzer type="query">
     <tokenizer class="solr.StandardTokenizerFactory"/>
     <filter class="com.weclay.ksearch2.KoreanStemFilterFactory" />
     <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
     <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
     <filter class="solr.LowerCaseFilterFactory"/>
-  </analyzer>analyzer>
-</fieldType>fieldType>
+  </analyzer>
+</fieldType>
 ```
 
 9. cd ~/lucene-solr/solr/example
